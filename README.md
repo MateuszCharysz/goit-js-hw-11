@@ -1,10 +1,13 @@
 # JS Homework nr 11
 
-HTML/css/parcel were ready. also following functions where given:
+Parcel was ready. Some things were used in homeworks from before
 
 `to be written`
 
 Libraries -  [Notiflix](https://github.com/notiflix/Notiflix#readme), [Simplelightbox](https://simplelightbox.com/), [Pixabay API](https://pixabay.com/api/docs/), [Axios](https://axios-http.com/)
 
 ## Task
-to be written
+Create "Gallery Maker" that searches pixabay and displays gallery with images.
+It should:
+1. Give massages about querry - if there is or not, how many finds etc.
+2. If user presses picture it should open lightbox

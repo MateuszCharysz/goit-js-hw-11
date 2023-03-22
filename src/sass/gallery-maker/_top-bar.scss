@@ -1,0 +1,27 @@
+.top-bar {
+  // position: relative;
+  height: 50px;
+  width: 100vw;
+  background-color: getColor(sky);
+  overflow: hidden;
+  transition: height $transition-time-timing;
+  box-shadow: 0 2px 6px rgba(25, 25, 25, 0.8);
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  // @include tablet {
+  //   height: 400px;
+  // }
+
+  // @include desktop {
+  //   height: 665px
+  // }
+  &__headline {
+    font-size: 16px;
+    color: getColor(semi-white);
+  }
+}

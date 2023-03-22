@@ -1,0 +1,64 @@
+/* 
+=====================================
+=====================================
+              GENERAL
+=====================================
+=====================================
+*/
+
+/* RESET
+============================================= */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+a,
+p,
+span,
+figure {
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  list-style-type: none;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* BODY
+============================================= */
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* CONTAINER (CENTERING AND WIDTH)
+============================================= */
+.container {
+  max-width: 1200px;
+  margin: 0 20px;
+  @media screen and (min-width: 1280px) {
+    margin: 0 auto;
+  }
+}
+
+/* GENERAL ITEM CLASS TO ALL LI
+============================================= */
+.item {
+  list-style: none;
+}
+
+/* SECTION (TOP AND BOTTOM PADDING)
+============================================= */
+.section {
+  padding: 60px 0; // padding ustawiamy indywidualnie pod sekcje
+ 
+}

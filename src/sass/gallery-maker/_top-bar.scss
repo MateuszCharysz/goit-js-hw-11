@@ -1,5 +1,4 @@
 .top-bar {
-  // position: relative;
   height: 50px;
   width: 100vw;
   background-color: getColor(sky);
@@ -14,44 +13,8 @@
   gap: 10px;
   z-index: 10;
 
-  // @include tablet {
-  //   height: 400px;
-  // }
-
-  // @include desktop {
-  //   height: 665px
-  // }
   &__headline {
     font-size: 16px;
     color: getColor(semi-white);
   }
-
-  &__search-btn {
-    background: #fff;
-    width: 159px;
-    height: 44px;
-    border-radius: 22px;
-    font-family: 'DM Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.31;
-    text-align: center;
-    color: getColor(dark-pink);
-    border: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    position: relative;
-    z-index: 2;
-    transition: background-color $transition-time-timing;
-  }
-
-
-
-  // &:hover {
-  //   cursor: pointer;
-  //   background: #ECEBEB;
-  // }
 }

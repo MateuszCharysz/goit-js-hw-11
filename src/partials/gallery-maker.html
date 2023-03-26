@@ -1,8 +1,10 @@
 <header class="top-bar containter">
     <h1 class="top-bar__headline">Welcome to PIXABAY image search by Mateusz</h1>
     <form class="search-form" id="search-form">
-        <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-        <button type="submit">Search</button>
+        <input class="search-form__input" type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+        <button class="search-button" type="submit">Search<svg width="16px" height="16px" class="search-button__icon">
+            <use href="images/icons.svg#icon-search"></use>
+        </svg></button>
     </form>
 </header>
 <div class="gallery">

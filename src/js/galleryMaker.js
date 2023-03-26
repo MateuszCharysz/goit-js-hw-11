@@ -1,17 +1,29 @@
-'use strict'
-import {log, httpCodeHandler, arrCompare, addLeadingZero} from './JsHelp'
-import simpleLightbox from 'simplelightbox'
-import Notiflix from 'notiflix'
-import axios from 'axios'
+'use strict';
+import { log, httpCodeHandler, arrCompare, addLeadingZero } from './JsHelp';
+import simpleLightbox from 'simplelightbox';
+import Notiflix from 'notiflix';
+import axios from 'axios';
+import debounce from 'lodash.debounce';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { galleryItems } from './gallery-items' // FOR CSS TEST
-(()=>{
+import { galleryItems } from './gallery-items'; // FOR CSS TEST
+(() => {
+  //AXIOS
+  const axios = require('axios').default;
+  const pixabayAPI = axios.create({
+    baseURL: 'https://pixabay.com/api/',
+    timeout: 1000
+  });
+const input = 'dog'
+  const axiosURL = `?key=34758818-84286f7512264df00409bd0b7&q=${input}&image_type=photo&safesearch=true&page=1&per_page=40`;
+
+
+  const debounceValue = 300
   //DOM elements
   const gallery = document.querySelector('.gallery');
-  //testing gallery styles
+  const photosearch = document.querySelector('#search-form');
+//testing gallery styles
   const createItem = item => {
-    let itemMarkup =
- `<a class="gallery__item" href="${item.original}">
+    let itemMarkup = `<a class="gallery__item" href="${item.original}">
   <img class="gallery__image" src="${item.preview}" alt="${item.description}" loading="lazy"/>
   <div class="gallery__image-info">
     <div class="gallery__image-info-item">
@@ -31,14 +43,13 @@ import { galleryItems } from './gallery-items' // FOR CSS TEST
         <p class="gallery__image-info-display">NUMBER</p>
     </div>
   </div>
-</a>
-`;
+  </a>
+  `;
     return itemMarkup;
   };
 
   const drawGallery = galleryItems.map(item => createItem(item)).join('');
   gallery.innerHTML = drawGallery;
-
 
 //lightbox
   const lightbox = new SimpleLightbox('.gallery .gallery__item', {
@@ -47,12 +58,18 @@ import { galleryItems } from './gallery-items' // FOR CSS TEST
     captionDelay: 250,
   });
 
-  //Events
+//Events
+  //Lightbox opening
   gallery.addEventListener('click', event => {
     event.preventDefault();
     if (event.target.nodeName !== 'IMG') return;
     // log(event.target);
     event.target.lightbox;
   });
-})()
-
+  // INPUT
+  const submitHandler = event => {event.preventDefault();
+  const {input} = event.currentTarget
+//sanityzacja??TRIM usunięcie wielu spacji przed i w środku ograniczenie do 100 znaków, zamiana spacji na +
+}
+  photosearch.addEventListener('submit', submitHandler);
+})();

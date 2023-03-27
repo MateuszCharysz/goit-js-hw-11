@@ -7,7 +7,7 @@ import axios from 'axios';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { galleryItems } from './gallery-items'; // FOR CSS TEST
 //AXIOS
-const axios = require('axios').default;
+
 const pixabayAPI = axios.create({
   baseURL: 'https://pixabay.com/api/',
   timeout: 1000

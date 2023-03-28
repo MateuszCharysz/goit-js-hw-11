@@ -43,6 +43,7 @@ const pixabayAPIluncher = async querry => {
     );
     drawGallery(response);
     lightbox.refresh();
+    log(lightbox);
   }
 };
 
@@ -52,7 +53,7 @@ const photosearch = document.querySelector('#search-form');
 //testing gallery styles
 
 //lightbox
-const lightbox = new SimpleLightbox('.gallery a', {
+const lightbox = new simpleLightbox('.gallery a', {
   captionSelector: event => event.firstElementChild,
   captionsData: 'alt',
   captionDelay: 250,

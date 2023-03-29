@@ -34,3 +34,9 @@ export const drawGallery = input =>
   (gallery.innerHTML = [...input.data.hits]
     .map(item => createItem(item))
     .join(''));
+
+export const appendGallery = input =>
+  gallery.insertAdjacentHTML(
+    'beforeend',
+    [...input.data.hits].map(item => createItem(item)).join(''),
+  );

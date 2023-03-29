@@ -1,46 +1,36 @@
 'use strict';
 import { log, httpCodeHandler, arrCompare, addLeadingZero } from './JsHelp';
 import simpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import Notiflix from 'notiflix';
 import axios from 'axios';
-import { drawGallery } from './drawGallery';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import JsLocalStorage from './JsLocalStorage';
-//AXIOS
-//LOCAL STORAGE INITIALIZATION
-JsLocalStorage.save(prompt, 'all');
-const pixabayAPI = axios.create({
-  baseURL: 'https://pixabay.com/api/',
-  timeout: 1000,
-  axiosURL: `?key=34758818-84286f7512264df00409bd0b7&q=${JsLocalStorage.load(
-    prompt,
-  )}&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=40`,
-});
-const pixabayAPIpagination = async () => {};
-const pixabayAPIluncher = async querry => {
-  JsLocalStorage.save(prompt, querry);
-  //const axiosURL = `?key=34758818-84286f7512264df00409bd0b7&q=${querry}&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=40`;
-  const response = await pixabayAPI.get(pixabayAPI.axiosURL).catch(error => {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
-      console.log(error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
-    }
-    console.log(error.config);
-  });
+import { drawGallery, appendGallery } from './renderGallery';
+import { cntrMathWithUpload } from './counterMath';
+import JsLocalStorage from './JsLocalStorage'; //save load remove
+import { APIurl } from './APIurl';
+import { pixabayAPIluncher } from './fetchphotos';
+
+const pixabayAPIpagination = async () => {
+  cntrMathWithUpload('page'); /// counterMatch
+  const response = await pixabayAPIluncher(APIurl()); ///APIurl and fetchphotos
+  try {
+    appendGallery(response); ///galleryMaker
+    lightbox.refresh();
+  } catch (error) {
+    Notiflix.Notify.failure(
+      'Shit went south with pagination.. :( Get Dev to check console',
+    );
+    console.log(error.name);
+    console.log(error.message);
+  }
+};
+const pixabayAPIquerry = async querry => {
+  JsLocalStorage.save('prompt', querry);
+  JsLocalStorage.save('page', 1);
+  const response = await pixabayAPIluncher(APIurl()); ///APIurl and fetchphotos
   try {
     if (response.data.totalHits === 0) {
-      Notiflix.Notify.failure(
+      Notiflix.Notify.info(
         'Sorry, there are no images matching your search query. Please try again.',
       );
     } else {
@@ -51,6 +41,9 @@ const pixabayAPIluncher = async querry => {
       lightbox.refresh();
     }
   } catch (error) {
+    Notiflix.Notify.failure(
+      'Shit went south with querry.. :( Get Dev to Check console',
+    );
     console.log(error.name);
     console.log(error.message);
   }
@@ -93,7 +86,7 @@ const submitHandler = event => {
     Notiflix.Notify.info('Search field was empty. Please use letters');
   } else {
     const querryInput = pureQuerry.replace(' ', '+');
-    pixabayAPIluncher(querryInput);
+    pixabayAPIquerry(querryInput);
   }
 };
 photosearch.addEventListener('submit', submitHandler);

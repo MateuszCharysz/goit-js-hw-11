@@ -17,4 +17,17 @@
     font-size: 16px;
     color: getColor(semi-white);
   }
+
+  &__headline-link {
+    font-size: 16px;
+    color: getColor(semi-white);
+
+    &:hover {
+      cursor: pointer;
+    }
+    &:visited:active{
+          color: getColor(semi-white);
+          text-decoration: none;
+    }
+  }
 }

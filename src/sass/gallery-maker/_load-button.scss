@@ -1,5 +1,5 @@
 .load-button {
-    margin-top: 10px;
+    margin: 10px auto 0px;
     background: getColor(sky);
     height: 40px;
     border-radius: 4px;
@@ -17,8 +17,6 @@
     transition: background-color $transition-time-timing;
     position: relative;
     bottom: 0;
-    left: 50%;
-
 
     &:hover {
         cursor: pointer;

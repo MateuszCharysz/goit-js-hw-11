@@ -4,18 +4,23 @@ import simpleLightbox from 'simplelightbox';
 import Notiflix from 'notiflix';
 import axios from 'axios';
 import { drawGallery } from './drawGallery';
-// import debounce from 'lodash.debounce';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-// import { galleryItems } from './gallery-items'; // FOR CSS TEST
+import JsLocalStorage from './JsLocalStorage';
 //AXIOS
-
+//LOCAL STORAGE INITIALIZATION
+JsLocalStorage.save(prompt, 'all');
 const pixabayAPI = axios.create({
   baseURL: 'https://pixabay.com/api/',
   timeout: 1000,
+  axiosURL: `?key=34758818-84286f7512264df00409bd0b7&q=${JsLocalStorage.load(
+    prompt,
+  )}&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=40`,
 });
+const pixabayAPIpagination = async () => {};
 const pixabayAPIluncher = async querry => {
-  const axiosURL = `?key=34758818-84286f7512264df00409bd0b7&q=${querry}&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=40`;
-  const response = await pixabayAPI.get(axiosURL).catch(error => {
+  JsLocalStorage.save(prompt, querry);
+  //const axiosURL = `?key=34758818-84286f7512264df00409bd0b7&q=${querry}&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=40`;
+  const response = await pixabayAPI.get(pixabayAPI.axiosURL).catch(error => {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
@@ -33,17 +38,21 @@ const pixabayAPIluncher = async querry => {
     }
     console.log(error.config);
   });
-  if (response.data.totalHits === 0) {
-    Notiflix.Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.',
-    );
-  } else {
-    Notiflix.Notify.success(
-      `Hooray! We found ${response.data.totalHits} images.`,
-    );
-    drawGallery(response);
-    lightbox.refresh();
-    log(lightbox);
+  try {
+    if (response.data.totalHits === 0) {
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.',
+      );
+    } else {
+      Notiflix.Notify.success(
+        `Hooray! We found ${response.data.totalHits} images.`,
+      );
+      drawGallery(response);
+      lightbox.refresh();
+    }
+  } catch (error) {
+    console.log(error.name);
+    console.log(error.message);
   }
 };
 
@@ -63,8 +72,7 @@ const lightbox = new simpleLightbox('.gallery a', {
 //Lightbox opening
 gallery.addEventListener('click', event => {
   event.preventDefault();
-  if (event.target.nodeName !== 'IMG') return;
-  // log(event.target);
+  if (event.target.nodeName !== 'A') return;
   event.target.lightbox;
 });
 // INPUT

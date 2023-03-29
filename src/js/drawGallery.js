@@ -3,8 +3,9 @@
 const gallery = document.querySelector('.gallery');
 
 const createItem = item => {
-  const { comments, downloads, likes, pageURL, tags, previewURL, views } = item;
-  let itemMarkup = `<a class="gallery__item" href="${pageURL}" toClear>
+  const { comments, downloads, likes, largeImageURL, tags, previewURL, views } =
+    item;
+  let itemMarkup = `<a class="gallery__item" href="${largeImageURL}" toClear>
   <img class="gallery__image" src="${previewURL}" alt="${tags}" loading="lazy"/>
   <div class="gallery__image-info">
     <div class="gallery__image-info-item">

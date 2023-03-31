@@ -3,7 +3,7 @@ import { log, httpCodeHandler, arrCompare, addLeadingZero } from './JsHelp';
 import simpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import Notiflix from 'notiflix';
-import axios from 'axios';
+// import axios from 'axios';
 import { drawGallery, appendGallery } from './renderGallery';
 import { cntrMathWithUpload } from './counterMath';
 import JsLocalStorage from './JsLocalStorage'; //save load remove
@@ -12,8 +12,8 @@ import { pixabayAPIluncher } from './fetchphotos';
 
 const pixabayAPIpagination = async () => {
   cntrMathWithUpload('page'); /// counterMatch
-  const response = await pixabayAPIluncher(APIurl()); ///APIurl and fetchphotos
   try {
+  const response = await pixabayAPIluncher(APIurl()); ///APIurl and fetchphotos
     appendGallery(response); ///galleryMaker
     lightbox.refresh();
   } catch (error) {
@@ -77,7 +77,7 @@ const submitHandler = event => {
   const pureQuerry = searchQuery.value
     .trim()
     .toLowerCase()
-    .replace(/\s+/g, ' ');
+    .replace(/\s+/g, ' '); // \s - any white symbol + one or more g globaly/across whole string
   if (pureQuerry.length > 100) {
     Notiflix.Notify.warning(
       'Search querry is to long. Please use maximum 100 characters (spaces included)',

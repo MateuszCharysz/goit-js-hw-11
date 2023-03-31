@@ -1,7 +1,7 @@
 'use strict'
 import { log, httpCodeHandler, arrCompare, addLeadingZero } from './JsHelp';
 import axios from 'axios';
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 
 const pixabayAPI = axios.create({
   baseURL: 'https://pixabay.com/api/',

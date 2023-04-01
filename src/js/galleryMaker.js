@@ -32,6 +32,7 @@ const submitHandler = event => {
   event.preventDefault();
   let listToClear = document.querySelectorAll('[toClear]');
   listToClear.forEach(el => el.remove());
+  if (load.classList.contains('is-hidden') !== true) toggleVisLoadBtn();
   const { searchQuery } = event.currentTarget;
   const pureQuerry = searchQuery.value
     .trim()

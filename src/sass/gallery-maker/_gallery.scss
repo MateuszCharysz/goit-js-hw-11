@@ -2,10 +2,10 @@
     display: grid;
     max-width: 1330px;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-auto-rows: 240px;
+    grid-auto-rows: $thumbnail-height;
     grid-gap: 12px;
     justify-content: center;
-    padding: 0;
+    padding: 0 6px;
     list-style: none;
     margin-top: 50px;
     margin-left: auto;
@@ -34,7 +34,6 @@
     &__image-info {
         display: flex;
         text-decoration: none;
-        // height: 100%;
     }
 
     &__image-info-item {

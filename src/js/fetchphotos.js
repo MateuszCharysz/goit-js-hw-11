@@ -1,7 +1,6 @@
-'use strict'
-import { log, httpCodeHandler, arrCompare, addLeadingZero } from './JsHelp';
+'use strict';
 import axios from 'axios';
-// import Notiflix from 'notiflix';
+import Notiflix from 'notiflix';
 
 const pixabayAPI = axios.create({
   baseURL: 'https://pixabay.com/api/',
@@ -10,7 +9,11 @@ const pixabayAPI = axios.create({
 
 export const pixabayAPIluncher = async url => {
   const response = await pixabayAPI.get(url).catch(error => {
-    if (error.response) {
+    if (error.response.status === 400) {
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results.",
+      );
+    } else if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
       console.log(error.response.data);
